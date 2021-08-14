@@ -6,8 +6,6 @@ function CourseVideos() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [courseVideos, setCourseVideos] = useState([]);
-
-  console.log("useParams()();", useParams());
   let { courseId = "" } = useParams();
   const token = localStorage.getItem("token");
 

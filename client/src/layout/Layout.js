@@ -1,10 +1,9 @@
 import React from "react";
 import { Button, Image } from "semantic-ui-react";
 import logo from "../logo.svg";
-import { useHistory } from "react-router-dom";
-function Layout({ children }) {
-  const history = useHistory();
+import { withRouter } from "react-router-dom";
 
+function Layout({ children, history }) {
   const handleLogout = () => {
     localStorage.setItem("token", "");
     window.location.href = "/";
@@ -43,4 +42,4 @@ function Layout({ children }) {
   );
 }
 
-export default Layout;
+export default withRouter(Layout);
