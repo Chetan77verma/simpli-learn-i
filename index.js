@@ -21,9 +21,6 @@ const router = Router();
 router.use(created, error, unauthorized, ok, conflict);
 app.use(created, error, unauthorized, ok, conflict);
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
 app.use("", protect);
 const port = process.env.PORT || 5000;
 
@@ -220,6 +217,9 @@ app.get("/api/coursevideos", async (req, res) => {
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
+app.get("/app", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 app.listen(port, () => {
   console.log(`Server is listning at http://localhost:${port}`);
