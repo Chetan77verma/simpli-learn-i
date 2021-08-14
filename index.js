@@ -21,7 +21,7 @@ const router = Router();
 router.use(created, error, unauthorized, ok, conflict);
 app.use(created, error, unauthorized, ok, conflict);
 
-app.use("", protect);
+// app.use("", protect);
 const port = process.env.PORT || 5000;
 
 const buildPath = path.join(__dirname, "./client/build");
@@ -142,7 +142,7 @@ app.get("/ping", async (req, res) => {
 app.post("/api/login", login);
 app.post("/api/signup", signup);
 
-app.post("/api/buy", async (req, res) => {
+app.post("/api/buy", protect, async (req, res) => {
   console.log("req.body", req.body);
   let { id: courseId, title, thumbnailURL, price, videoLink } = req.body;
   const { id, email } = req.user;
@@ -167,7 +167,7 @@ app.post("/api/buy", async (req, res) => {
   res.status(200).send({ msg: "Success", success: true });
 });
 
-app.get("/api/boughtcourses", async (req, res) => {
+app.get("/api/boughtcourses", protect, async (req, res) => {
   //filter by current user
   console.log("req.user", req.user);
   const { id, email } = req.user;
@@ -190,7 +190,7 @@ app.get("/api/boughtcourses", async (req, res) => {
   });
   return res.status(200).send({ msg: "Success", data: courses, success: true });
 });
-app.get("/api/coursevideos", async (req, res) => {
+app.get("/api/coursevideos", protect, async (req, res) => {
   const { id: courseId } = req.query;
   const { id, email } = req.user;
   let order = await db.order.findMany({
@@ -217,7 +217,7 @@ app.get("/api/coursevideos", async (req, res) => {
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get("/app", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
