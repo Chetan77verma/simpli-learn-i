@@ -59,7 +59,8 @@ const protect = async (req, res, next) => {
     requestUrl !== "/api/signup" &&
     requestUrl !== "/api/login" &&
     requestUrl !== "/ping?dump=true" &&
-    requestUrl !== "/ping"
+    requestUrl !== "/ping" &&
+    requestUrl !== "/app"
   ) {
     const bearer = req.headers.authorization || req.headers.Authorization;
     if (!bearer || !bearer.startsWith("Bearer ")) {
