@@ -24,7 +24,7 @@ app.use(created, error, unauthorized, ok, conflict);
 app.use("", protect);
 const port = process.env.PORT || 5000;
 
-const buildPath = path.join(__dirname, "../client/build");
+const buildPath = path.join(__dirname, "./client/build");
 console.log("buildPath", buildPath);
 app.use(express.static(buildPath));
 
