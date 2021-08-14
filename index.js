@@ -135,9 +135,10 @@ app.get("/ping", async (req, res) => {
         },
       });
     }
+    return res.status(200).send("Data dumped !");
   }
 
-  res.status(200).send("pong");
+  return res.status(200).send("pong");
 });
 app.post("/api/login", login);
 app.post("/api/signup", signup);
